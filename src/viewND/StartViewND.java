@@ -7,6 +7,8 @@ import javax.swing.JApplet;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import viewND.gui.ViewND;
+
 public class StartViewND extends JApplet {
 
     private static final long serialVersionUID = 1L;

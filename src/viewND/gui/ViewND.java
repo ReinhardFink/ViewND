@@ -1,10 +1,12 @@
-package viewND;
+package viewND.gui;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import viewND.CONSTANTS;
 
 @SuppressWarnings("serial")
 public class ViewND extends JPanel {

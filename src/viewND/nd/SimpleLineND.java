@@ -1,21 +1,23 @@
-package viewND;
+package viewND.nd;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 
-public class LineND extends AbstractObjectND {
+import viewND.CONSTANTS;
+
+public class SimpleLineND extends SimpleAbstractND implements InterfaceND {
 	
-	private PointND startPoint;
-	private PointND endPoint;
+	private SimplePointND startPoint;
+	private SimplePointND endPoint;
 	
-	public LineND(PointND startPoint, PointND endPoint) {
+	public SimpleLineND(SimplePointND startPoint, SimplePointND endPoint) {
 		super();
 		this.startPoint = startPoint;
 		this.endPoint = endPoint;
 	}
 	
-	public LineND(PointND startPoint, PointND endPoint, Color color) {
+	public SimpleLineND(SimplePointND startPoint, SimplePointND endPoint, Color color) {
 		this(startPoint, endPoint);
 		setColor(color);
 	}
@@ -31,16 +33,10 @@ public class LineND extends AbstractObjectND {
 	}
 
 	@Override
-	public AbstractObjectND getTransformedObjectND(AffineTransformND transform) {
-		return (new LineND(transform.transformPointND(this.startPoint),
-				  		   transform.transformPointND(this.endPoint)));
-	}
-
-	@Override
 	public void paint(Graphics2D g2, AffineTransformND affin) {
 		// set basic draw options
 		super.paint(g2, affin);
-		LineND l = (LineND)getTransformedObjectND(affin);		
+		SimpleLineND l = (SimpleLineND)getTransformedObjectND(affin);		
 		g2.draw(new Line2D.Double(l.startPoint.getXi(0),l.startPoint.getXi(1),
 								  l.endPoint.getXi(0),  l.endPoint.getXi(1)));
 		
@@ -51,5 +47,11 @@ public class LineND extends AbstractObjectND {
 			g2.drawString(endPoint.getLabel(), (int)l.endPoint.getXi(0) + CONSTANTS.LABEL_OFFSET_X,
 					   						   (int)l.endPoint.getXi(1) + CONSTANTS.LABEL_OFFSET_Y);
 		
+	}
+
+	@Override
+	public InterfaceND getTransformedObjectND(AffineTransformND transform) {
+		return (new SimpleLineND(transform.transform(this.startPoint),
+				  		   transform.transform(this.endPoint)));
 	}
 }

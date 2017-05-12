@@ -1,4 +1,4 @@
-package viewND;
+package viewND.gui;
 
 import java.awt.GridLayout;
 
@@ -7,7 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import viewND.JNumberSlider;
+import viewND.CONSTANTS;
+import viewND.nd.AffineTransformND;
 
 @SuppressWarnings("serial")
 public class ViewNDSliderControl extends JScrollPane {

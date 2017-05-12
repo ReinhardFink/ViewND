@@ -1,17 +1,19 @@
-package viewND;
+package viewND.nd;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.text.DecimalFormat;
 
-public class PointND extends AbstractObjectND{
+import viewND.CONSTANTS;
+
+public class SimplePointND extends SimpleAbstractND implements InterfaceND {
 	
 	private double[] x;
 	
 	private double rX;
 	private double rY;
 	
-	public PointND() {
+	public SimplePointND() {
 		this.x = new double[CONSTANTS.n];
 				
 		this.rX = 30;
@@ -40,7 +42,7 @@ public class PointND extends AbstractObjectND{
 
 	@Override
 	public boolean equals(Object o) {
-		PointND p = (PointND)o;
+		SimplePointND p = (SimplePointND)o;
 		if (this == p)
 			return true;
 		if (p == null)
@@ -76,7 +78,7 @@ public class PointND extends AbstractObjectND{
 		// set basic draw options
 		super.paint(g2, affin);
 		// Projection to x1/x2 plane
-		PointND p = (PointND)getTransformedObjectND(affin);
+		SimplePointND p = (SimplePointND)getTransformedObjectND(affin);
 		//g2.draw(new Ellipse2D.Double(p.getXi(0), p.getXi(1), this.rX/CONSTANTS.SCALE_FACTOR, this.rY/CONSTANTS.SCALE_FACTOR));
 		g2.draw(new Ellipse2D.Double(p.getXi(0), p.getXi(1), this.rX, this.rY));
 		if (getLabel() != null)
@@ -85,8 +87,8 @@ public class PointND extends AbstractObjectND{
 	}
 
 	@Override
-	public AbstractObjectND getTransformedObjectND(AffineTransformND affin) {
-		return affin.transformPointND(this);
+	public InterfaceND getTransformedObjectND(AffineTransformND affin) {
+		return affin.transform(this);
 	}
 
 }

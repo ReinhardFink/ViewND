@@ -8,10 +8,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import viewND.AbstractObjectND;
-import viewND.AffineTransformND;
+import viewND.nd.SimpleAbstractND;
+import viewND.nd.AffineTransformND;
 import viewND.CONSTANTS;
-import viewND.PointND;
+import viewND.nd.SimplePointND;
 
 public class AffineTransformNDTest {
 
@@ -130,7 +130,7 @@ public class AffineTransformNDTest {
 	@Test
 	public void test_transformPointND() {
 		// id * p1 = p1
-		PointND p1 = new PointND();
+		SimplePointND p1 = new SimplePointND();
 		for (int i = 0; i < CONSTANTS.n; i++) {
 			p1.setXi(i,i);
 		}
@@ -138,18 +138,18 @@ public class AffineTransformNDTest {
 		System.out.println(p1);
 		
 		AffineTransformND id = new AffineTransformND();
-		PointND p2 = id.transformPointND(p1);
+		SimplePointND p2 = id.transform(p1);
 		assertTrue(p2.equals(p1));
 		
 		// all_1 * p1 = all_n
-		p1 = new PointND();
+		p1 = new SimplePointND();
 		for (int i = 0; i < CONSTANTS.n; i++) {
 			p1.setXi(i,1);
 		}
 		System.out.println("Print PointND 1/1/1.../1");
 		System.out.println(p1);
 		
-		p2 = new PointND();
+		p2 = new SimplePointND();
 		for (int i = 0; i < CONSTANTS.n; i++) {
 			p2.setXi(i,CONSTANTS.n);
 		}
@@ -160,7 +160,7 @@ public class AffineTransformNDTest {
 		for (int line = 0; line < CONSTANTS.n; line++)
 			for (int row = 0; row < CONSTANTS.n; row++) 
 				all_1.m[line][row] = 1;
-		AbstractObjectND p3 = all_1.transformPointND(p1);
+		SimpleAbstractND p3 = all_1.transform(p1);
 		assertTrue(p3.equals(p2));
 	}
 }
