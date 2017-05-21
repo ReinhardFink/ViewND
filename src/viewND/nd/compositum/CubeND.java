@@ -1,8 +1,11 @@
-package viewND.nd;
+package viewND.nd.compositum;
 
 import viewND.CONSTANTS;
+import viewND.nd.InterfacePaintAbleND;
+import viewND.nd.primitive.SimpleLineND;
+import viewND.nd.primitive.SimplePointND;
 
-public class CubeND extends CompositeND implements InterfaceND {
+public class CubeND extends CompositeND implements InterfacePaintAbleND {
 	
 	private int numberOfPoints;
 	private SimplePointND[] pointND;

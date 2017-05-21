@@ -6,15 +6,15 @@ import javax.swing.JPanel;
 
 import viewND.CONSTANTS;
 import viewND.nd.AffineTransformND;
-import viewND.nd.CubeND;
-import viewND.nd.CompositeND;
-import viewND.nd.SystemND;
+import viewND.nd.InterfacePaintAbleND;
+import viewND.nd.compositum.CubeND;
+import viewND.nd.compositum.SystemND;
 
 public class ViewNDPaint extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	private CompositeND coordinateSystemND;
-	private CompositeND cubusND;
+	private InterfacePaintAbleND coordinateSystemND;
+	private InterfacePaintAbleND cubusND;
 	private AffineTransformND[] affinTransformationND;
 
 	public ViewNDPaint() {

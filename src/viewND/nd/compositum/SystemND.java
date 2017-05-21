@@ -1,10 +1,13 @@
-package viewND.nd;
+package viewND.nd.compositum;
 
 import java.awt.BasicStroke;
 
 import viewND.CONSTANTS;
+import viewND.nd.InterfacePaintAbleND;
+import viewND.nd.primitive.SimpleLineND;
+import viewND.nd.primitive.SimplePointND;
 
-public class SystemND extends CompositeND implements InterfaceND {
+public class SystemND extends CompositeND implements InterfacePaintAbleND {
 
 	public SystemND(String label) {
 		super(label);

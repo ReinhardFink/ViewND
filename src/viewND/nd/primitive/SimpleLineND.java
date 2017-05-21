@@ -1,12 +1,14 @@
-package viewND.nd;
+package viewND.nd.primitive;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 
 import viewND.CONSTANTS;
+import viewND.nd.AffineTransformND;
+import viewND.nd.InterfacePaintAbleND;
 
-public class SimpleLineND extends SimpleAbstractND implements InterfaceND {
+public class SimpleLineND extends SimpleAbstractND implements InterfacePaintAbleND {
 	
 	private SimplePointND startPoint;
 	private SimplePointND endPoint;
@@ -50,7 +52,7 @@ public class SimpleLineND extends SimpleAbstractND implements InterfaceND {
 	}
 
 	@Override
-	public InterfaceND getTransformedObjectND(AffineTransformND transform) {
+	public InterfacePaintAbleND getTransformedObjectND(AffineTransformND transform) {
 		return (new SimpleLineND(transform.transform(this.startPoint),
 				  		   transform.transform(this.endPoint)));
 	}

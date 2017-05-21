@@ -1,12 +1,14 @@
-package viewND.nd;
+package viewND.nd.primitive;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.text.DecimalFormat;
 
 import viewND.CONSTANTS;
+import viewND.nd.AffineTransformND;
+import viewND.nd.InterfacePaintAbleND;
 
-public class SimplePointND extends SimpleAbstractND implements InterfaceND {
+public class SimplePointND extends SimpleAbstractND implements InterfacePaintAbleND {
 	
 	private double[] x;
 	
@@ -77,7 +79,7 @@ public class SimplePointND extends SimpleAbstractND implements InterfaceND {
 	public void paint(Graphics2D g2, AffineTransformND affin) {
 		// set basic draw options
 		super.paint(g2, affin);
-		// Projection to x1/x2 plane
+		// Projection to x1/x2 planeAffineTransformND
 		SimplePointND p = (SimplePointND)getTransformedObjectND(affin);
 		//g2.draw(new Ellipse2D.Double(p.getXi(0), p.getXi(1), this.rX/CONSTANTS.SCALE_FACTOR, this.rY/CONSTANTS.SCALE_FACTOR));
 		g2.draw(new Ellipse2D.Double(p.getXi(0), p.getXi(1), this.rX, this.rY));
@@ -87,7 +89,7 @@ public class SimplePointND extends SimpleAbstractND implements InterfaceND {
 	}
 
 	@Override
-	public InterfaceND getTransformedObjectND(AffineTransformND affin) {
+	public InterfacePaintAbleND getTransformedObjectND(AffineTransformND affin) {
 		return affin.transform(this);
 	}
 

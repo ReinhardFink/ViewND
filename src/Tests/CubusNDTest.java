@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import viewND.CONSTANTS;
-import viewND.nd.CubeND;
+import viewND.nd.compositum.CubeND;
 
 public class CubusNDTest {
 

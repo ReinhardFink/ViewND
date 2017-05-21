@@ -8,10 +8,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import viewND.nd.SimpleAbstractND;
 import viewND.nd.AffineTransformND;
+import viewND.nd.primitive.SimpleAbstractND;
+import viewND.nd.primitive.SimplePointND;
 import viewND.CONSTANTS;
-import viewND.nd.SimplePointND;
 
 public class AffineTransformNDTest {
 
@@ -39,9 +39,9 @@ public class AffineTransformNDTest {
 		for (int line = 0; line < CONSTANTS.n; line++) {
 			for (int row = 0; row < CONSTANTS.n; row++) {
 				if (line == row)
-					assertEquals("Wrong value in id", 1, id.m[line][row], 0.00001);
+					assertEquals("Wrong value in id", 1, id.matrix[line][row], 0.00001);
 				else
-					assertEquals("Wrong value in id", 0, id.m[line][row], 0.00001);
+					assertEquals("Wrong value in id", 0, id.matrix[line][row], 0.00001);
 			}
 		}
 	}
@@ -159,7 +159,7 @@ public class AffineTransformNDTest {
 		AffineTransformND all_1 = new AffineTransformND();
 		for (int line = 0; line < CONSTANTS.n; line++)
 			for (int row = 0; row < CONSTANTS.n; row++) 
-				all_1.m[line][row] = 1;
+				all_1.matrix[line][row] = 1;
 		SimpleAbstractND p3 = all_1.transform(p1);
 		assertTrue(p3.equals(p2));
 	}

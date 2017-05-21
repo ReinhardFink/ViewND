@@ -1,9 +1,13 @@
-package viewND.nd;
+package viewND.nd.compositum;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-public class CompositeND implements InterfaceND {
+import viewND.nd.AffineTransformND;
+import viewND.nd.InterfacePaintAbleND;
+import viewND.nd.primitive.SimpleAbstractND;
+
+public class CompositeND implements InterfacePaintAbleND {
 	
 	private ArrayList<SimpleAbstractND> objectsND;
 	

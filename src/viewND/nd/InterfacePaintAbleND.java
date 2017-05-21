@@ -2,7 +2,7 @@ package viewND.nd;
 
 import java.awt.Graphics2D;
 
-public interface InterfaceND {
+public interface InterfacePaintAbleND {
 	
 	public void setLabel(String lable);
 

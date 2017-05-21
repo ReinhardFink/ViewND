@@ -1,11 +1,14 @@
-package viewND.nd;
+package viewND.nd.primitive;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
-public abstract class SimpleAbstractND implements InterfaceND {
+import viewND.nd.AffineTransformND;
+import viewND.nd.InterfacePaintAbleND;
+
+public abstract class SimpleAbstractND implements InterfacePaintAbleND {
 	
 	private Color color;
 	private BasicStroke stroke;
@@ -53,5 +56,5 @@ public abstract class SimpleAbstractND implements InterfaceND {
 		g2.setColor(color);
 	}
 	
-	public abstract InterfaceND getTransformedObjectND(AffineTransformND affin);
+	public abstract InterfacePaintAbleND getTransformedObjectND(AffineTransformND affin);
 }

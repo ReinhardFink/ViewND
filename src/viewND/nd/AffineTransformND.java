@@ -3,6 +3,7 @@ package viewND.nd;
 import java.text.DecimalFormat;
 
 import viewND.CONSTANTS;
+import viewND.nd.primitive.SimplePointND;
 
 public class AffineTransformND {
 
@@ -16,19 +17,19 @@ public class AffineTransformND {
 	// [ y']=[ m10 m11 m12 ] [ y ]=[ m10x + m11y + m12z ]
 	// [ z'] [ m20 m21 m22 ] [ z ] [ m20x + m21y + m22z ]
 
-	public double[][] m;
+	public double[][] matrix;
 
 	public AffineTransformND() {
-		this.m = new double[CONSTANTS.n][CONSTANTS.n];
+		this.matrix = new double[CONSTANTS.n][CONSTANTS.n];
 		for (int i = 0; i < CONSTANTS.n; i++)
-			m[i][i] = 1;
+			matrix[i][i] = 1;
 	}
 
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
 		for (int line = 0; line < CONSTANTS.n; line++) {
 			for (int row = 0; row < CONSTANTS.n; row++) {
-				buffer.append(new DecimalFormat("+#,##0.00;-#").format(m[line][row]));
+				buffer.append(new DecimalFormat("+#,##0.00;-#").format(matrix[line][row]));
 				buffer.append('|');
 			}
 			buffer.append('\n');
@@ -40,46 +41,38 @@ public class AffineTransformND {
 		AffineTransformND t = (AffineTransformND) o;
 		for (int line = 0; line < CONSTANTS.n; line++)
 			for (int row = 0; row < CONSTANTS.n; row++)
-				if (Math.abs(this.m[line][row] - t.m[line][row]) > CONSTANTS.DELTA)
+				if (Math.abs(this.matrix[line][row] - t.matrix[line][row]) > CONSTANTS.DELTA)
 					return false;
 		return true;
 	}
 
-	/*
-	 * [this] = [this] x [t]
-	 */
-	public AffineTransformND concatenate(AffineTransformND t) {
-
-		double temp[][] = new double[CONSTANTS.n][CONSTANTS.n];
-
+	private double[][] createNewMatrix(AffineTransformND t) {
+		double temp[][] = new double[CONSTANTS.n][CONSTANTS.n];	
 		for (int line = 0; line < CONSTANTS.n; line++)
 			for (int row = 0; row < CONSTANTS.n; row++) {
 				double sum = 0;
 				for (int i = 0; i < CONSTANTS.n; i++)
-					sum += m[line][i] * t.m[i][row];
+					sum += matrix[line][i] * t.matrix[i][row];
 				temp[line][row] = sum;
 			}
-		this.m = temp;
-		return this;
+		return temp;
 	}
 
 	/*
 	 * [new] = [this] x [t]
 	 */
 	public AffineTransformND mult(AffineTransformND t) {
+		AffineTransformND newAT = new AffineTransformND();
+		newAT.matrix = createNewMatrix(t);
+		return newAT;
+	}
 
-		double newM[][] = new double[CONSTANTS.n][CONSTANTS.n];
-
-		for (int line = 0; line < CONSTANTS.n; line++)
-			for (int row = 0; row < CONSTANTS.n; row++) {
-				double sum = 0;
-				for (int i = 0; i < CONSTANTS.n; i++)
-					sum += m[line][i] * t.m[i][row];
-				newM[line][row] = sum;
-			}
-		AffineTransformND temp = new AffineTransformND();
-		temp.m = newM;
-		return temp;
+	/*
+	 * [this] = [this] x [t]
+	 */
+	public AffineTransformND concatenate(AffineTransformND t) {
+		this.matrix = createNewMatrix(t);
+		return this;
 	}
 
 	/*
@@ -90,24 +83,24 @@ public class AffineTransformND {
 	 */
 	public static AffineTransformND getRotation_i_j(int i, int j, double theta) {
 		AffineTransformND rotation = new AffineTransformND();
-		rotation.m[i][i] = 0;
-		rotation.m[j][j] = 0;
-		rotation.m[i][i] = +Math.cos(theta);
-		rotation.m[i][j] = -Math.sin(theta);
-		rotation.m[j][i] = +Math.sin(theta);
-		rotation.m[j][j] = +Math.cos(theta);
+		rotation.matrix[i][i] = 0;
+		rotation.matrix[j][j] = 0;
+		rotation.matrix[i][i] = +Math.cos(theta);
+		rotation.matrix[i][j] = -Math.sin(theta);
+		rotation.matrix[j][i] = +Math.sin(theta);
+		rotation.matrix[j][j] = +Math.cos(theta);
 		return rotation;
 	}
 
 	/*
-	 * returns with this transformation transformed point
+	 * returns an with this transformation transformed pointND
 	 */
 	public SimplePointND transform(SimplePointND p) {
 		SimplePointND newPoint = new SimplePointND();
 		for (int line = 0; line < CONSTANTS.n; line++) {
 			double sum = 0;
 			for (int i = 0; i < CONSTANTS.n; i++)
-				sum += this.m[line][i] * p.getXi(i);
+				sum += this.matrix[line][i] * p.getXi(i);
 			newPoint.setXi(line, sum);
 		}
 		return newPoint;
